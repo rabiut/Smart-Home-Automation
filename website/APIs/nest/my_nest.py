@@ -62,6 +62,7 @@ for device in devices:
                     current_temperature_celsius = temperature_traits.get('ambientTemperatureCelsius')
                     if current_temperature_celsius is not None:
                         print(f"Current temperature: {current_temperature_celsius}°C")
+                        
                     else:
                         print("Current temperature data is not available.")
                 else:
