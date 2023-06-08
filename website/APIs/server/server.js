@@ -1,15 +1,28 @@
+const fs = require('fs');
 const express = require('express');
+const cors = require('cors');
 const { exec } = require('child_process');
 const app = express();
 app.use(express.json());
+app.use(cors());
+
 
 app.get('/api/v1/readTemp', (req, res) => {
-    exec('python3 /path/to/your/read_temp.py', (err, stdout, stderr) => {
+    exec('python ../nest/read_temp.py', (err, stdout, stderr) => {
         if (err) {
             console.error(err);
             res.json({ success: false });
         } else {
-            res.json({ success: true, temp: stdout });
+            // After the Python script has run, read the temperature from the file:
+            fs.readFile('../nest/temperature.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error(err);
+                    res.json({ success: false });
+                } else {
+                    const tempData = JSON.parse(data);
+                    res.json({ success: true, temperature: tempData.temperature });
+                }
+            });
         }
     });
 });
