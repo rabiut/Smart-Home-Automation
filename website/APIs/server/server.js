@@ -13,58 +13,131 @@ app.get('/api/v1/readTemp', (req, res) => {
             console.error(err);
             res.json({ success: false });
         } else {
-            // After the Python script has run, read the temperature from the file:
-            fs.readFile('../nest/temperature.json', 'utf8', (err, data) => {
-                if (err) {
-                    console.error(err);
-                    res.json({ success: false });
-                } else {
-                    const tempData = JSON.parse(data);
-                    res.json({ success: true, temperature: tempData.temperature });
-                }
-            });
+            // Assuming stdout contains the temperature value
+            const temperature = parseFloat(stdout);
+
+            if (isNaN(temperature)) {
+                console.error("Invalid temperature data received from Python script.");
+                res.json({ success: false });
+            } else {
+                res.json({ success: true, temperature: temperature });
+            }
         }
     });
 });
 
-// app.post('/api/v1/setTemp', (req, res) => {
-//     const data = req.body;
-//     exec(`python3 /path/to/your/set_temp.py ${data.temp}`, (err, stdout, stderr) => {
-//         if (err) {
-//             console.error(err);
-//             res.json({ success: false });
-//         } else {
-//             res.json({ success: true });
-//         }
-//     });
-// });
+app.post('/api/v1/setCoolTemp', (req, res) => {
+    const data = req.body;
 
-// app.post('/api/v1/lights', (req, res) => {
-//     const data = req.body;
-//     let scriptPath = '';
+    exec(`python3 ../nest/smart_thermostat.py set_cool_temp ${data.temp}`, (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            res.json({ success: false });
+        } else {
+            // Assuming stdout contains the JSON response from Python script
+            const response = JSON.parse(stdout);
+            res.json(response);  // Directly return the response object
+        }
+    });
+});
+
+app.post('/api/v1/setHeatTemp', (req, res) => {
+    const data = req.body;
+
+    exec(`python3 ../nest/smart_thermostat.py set_heat_temp ${data.temp}`, (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            res.json({ success: false });
+        } else {
+            // Assuming stdout contains the JSON response from Python script
+            const response = JSON.parse(stdout);
+            res.json(response);  // Directly return the response object
+        }
+    });
+});
+
+app.post('/api/v1/turnOffThermostat', (req, res) => {
+    exec(`python3 ../nest/smart_thermostat.py turn_off`, (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            res.json({ success: false });
+        } else {
+            // Assuming stdout contains the JSON response from Python script
+            const response = JSON.parse(stdout);
+            res.json(response);  // Directly return the response object
+        }
+    });
+});
+
+app.get('/api/v1/getModeAndTemp', (req, res) => {
+    exec('python3 ../nest/smart_thermostat.py get_mode_temp', (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            res.json({ success: false });
+        } else {
+            // Assuming stdout contains the JSON response from Python script
+            const response = JSON.parse(stdout);
+            res.json(response);  // Directly return the response object
+        }
+    });
+});
+
+//************************Get Status****** */
+app.get('/api/v1/getLightStatus', (req, res) => {
+    const room = req.query.room;  // Get the room from query parameters
+
+    exec(`python3 ../wiz/smart_lighting.py status ${room}`, (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            res.json({ error: stderr });
+        } else {
+            // stdout should contain the JSON string with the status of the bulbs
+            const status = JSON.parse(stdout);
+            res.json(status);  // Directly return the status object
+        }
+    });
+});
+
+
+
+app.get('/api/v1/allLightStatus', (req, res) => {
+    exec('python3 ../wiz/smart_lighting.py all_status', (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            res.json({ success: false });
+        } else {
+            // stdout should contain the JSON string with the status of all bulbs
+            const status = JSON.parse(stdout);
+            res.json(status);  // Directly return the status object
+        }
+    });
+});
+
+
+
+app.post('/api/v1/lights', (req, res) => {
+    const data = req.body;
+    let scriptPath = '../wiz/smart_lighting.py';
+
+    let command = `python3 ${scriptPath} ${data.action} ${data.room}`;
+
+    // Add brightness level to the command if it is provided
+    if (data.action === "brightness" && data.brightness_level) {
+        command += ` ${data.brightness_level}`;
+    }
     
-//     switch (data.action) {
-//         case 'on':
-//             scriptPath = '/path/to/your/turn_on_lights.py';
-//             break;
-//         case 'off':
-//             scriptPath = '/path/to/your/turn_off_lights.py';
-//             break;
-//         case 'dim':
-//             scriptPath = '/path/to/your/dim_lights.py';
-//             break;
-//         default:
-//             return res.json({ success: false, message: 'Invalid action' });
-//     }
-    
-//     exec(`python3 ${scriptPath}`, (err, stdout, stderr) => {
-//         if (err) {
-//             console.error(err);
-//             res.json({ success: false });
-//         } else {
-//             res.json({ success: true });
-//         }
-//     });
-// });
+    exec(command, (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            res.json({ success: false });
+        } else {
+            const status = JSON.parse(stdout);
+            res.json({ success: true, status: status });
+        }
+    });
+});
+
+
+
 
 app.listen(5000, '0.0.0.0', () => console.log('Server is running on port 5000'));

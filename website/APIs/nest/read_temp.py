@@ -54,9 +54,8 @@ for device in devices:
                         'ambientTemperatureCelsius')
                     if current_temperature_celsius is not None:
                         # write the current temperature to a file
-                        with open('./website/APIs/nest/temperature.json', 'w') as f:
-                            json.dump(
-                                {"temperature": current_temperature_celsius}, f)
+                        with open('./temperature.json', 'w') as f:
+                            json.dump({"temperature": current_temperature_celsius}, f)
                             print(current_temperature_celsius)
 
                     else:
