@@ -10,6 +10,16 @@ CLIENT_ID = '986207922032-26pg2rnsrbjf5f1lk224h42omp4u9ljt.apps.googleuserconten
 CLIENT_SECRET = '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'
 SCOPES = ['https://www.googleapis.com/auth/sdm.service']
 
+
+def get_authorization():
+    flow = InstalledAppFlow.from_client_config(
+        {"web": {"client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
+                 "auth_uri": "https://accounts.google.com/o/oauth2/auth", 
+                 "token_uri": "https://oauth2.googleapis.com/token"}},
+        scopes=SCOPES
+    )
+    return flow.run_local_server(port=41567)
+
 def authenticate():
     creds = None
 
@@ -19,14 +29,13 @@ def authenticate():
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            try:
+                creds.refresh(Request())
+            except:
+                creds = get_authorization() # If refresh fails, get new authorization
         else:
-            flow = InstalledAppFlow.from_client_config(
-                {"web": {"client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
-                         "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token"}},
-                scopes=SCOPES
-            )
-            creds = flow.run_local_server(port=41567)
+            creds = get_authorization()
+
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
     
