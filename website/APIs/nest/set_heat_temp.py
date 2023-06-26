@@ -1,6 +1,6 @@
 import sys
 import os
-import json
+# import json
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import pickle
@@ -9,7 +9,6 @@ from googleapiclient.discovery import build
 CLIENT_ID = '986207922032-26pg2rnsrbjf5f1lk224h42omp4u9ljt.apps.googleusercontent.com'
 CLIENT_SECRET = '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'
 SCOPES = ['https://www.googleapis.com/auth/sdm.service']
-
 creds = None
 if os.path.exists('token.pickle'):
     with open('token.pickle', 'rb') as token:

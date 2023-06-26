@@ -70,7 +70,7 @@ app.post('/api/v1/turnOffThermostat', (req, res) => {
 });
 
 app.get('/api/v1/getModeAndTemp', (req, res) => {
-    exec('python3 ../nest/smart_thermostat.py get_mode_temp', (err, stdout, stderr) => {
+    exec('python ../nest/smart_thermostat.py get_mode_temp', (err, stdout, stderr) => {
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -82,31 +82,15 @@ app.get('/api/v1/getModeAndTemp', (req, res) => {
     });
 });
 
-//************************Get Status****** */
-app.get('/api/v1/getLightStatus', (req, res) => {
-    const room = req.query.room;  // Get the room from query parameters
-
-    exec(`python3 ../wiz/smart_lighting.py status ${room}`, (err, stdout, stderr) => {
-        if (err) {
-            console.error(err);
-            res.json({ error: stderr });
-        } else {
-            // stdout should contain the JSON string with the status of the bulbs
-            const status = JSON.parse(stdout);
-            res.json(status);  // Directly return the status object
-        }
-    });
-});
 
 
-
-app.get('/api/v1/allLightStatus', (req, res) => {
-    exec('python3 ../wiz/smart_lighting.py all_status', (err, stdout, stderr) => {
+app.get('/api/v1/fetchDevices', (req, res) => {
+    exec('python ../smartThings/fetch_devices.py', (err, stdout, stderr) => {
         if (err) {
             console.error(err);
             res.json({ success: false });
         } else {
-            // stdout should contain the JSON string with the status of all bulbs
+            // stdout should contain the JSON string with the status of all rooms
             const status = JSON.parse(stdout);
             res.json(status);  // Directly return the status object
         }
@@ -114,18 +98,17 @@ app.get('/api/v1/allLightStatus', (req, res) => {
 });
 
 
-
 app.post('/api/v1/lights', (req, res) => {
     const data = req.body;
-    let scriptPath = '../wiz/smart_lighting.py';
+    let scriptPath = '../smartThings/light_control.py';
 
-    let command = `python3 ${scriptPath} ${data.action} ${data.room}`;
+    let command = `python3 ${scriptPath} ${data.action} ${data.device_id}`;
 
     // Add brightness level to the command if it is provided
     if (data.action === "brightness" && data.brightness_level) {
         command += ` ${data.brightness_level}`;
     }
-    
+
     exec(command, (err, stdout, stderr) => {
         if (err) {
             console.error(err);
@@ -136,6 +119,7 @@ app.post('/api/v1/lights', (req, res) => {
         }
     });
 });
+
 
 
 
