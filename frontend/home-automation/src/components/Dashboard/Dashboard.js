@@ -7,8 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Modal from "@/components/Modal";
 import LightList from "@/components/LightList";
-import CurrentDate from "@/lib/utils/CurrentDate";
-import CurrentLocation from "@/lib/utils/CurrentLocation";
+import HomeWidget from "@/components/HomeWidget";
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -69,33 +68,7 @@ const Dashboard = () => {
         {/* Dashboard Col */}
         <div className="dashboard__col flex flex-col w-full md:w-96 gap-5">
           {/* Home Widget */}
-          <div className="home__widget flex flex-col h-full text-base lg:text-lg xl:text-xl bg-white shadow-md border border-gray-200 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
-            <div className="bar w-full h-1/5 bg-primary-500 p-4 text-white font-bold rounded-t-lg">
-              Your Home
-            </div>
-            <div className="content w-full h-4/5 p-6 sm:p-4 flex flex-col justify-between">
-              <span>
-                Condition:
-                <span className="condition text-green-500 ml-4">Good</span>
-              </span>
-              <span>
-                <CurrentDate />
-              </span>
-              <span>
-                <CurrentLocation />
-              </span>
-              <div className="stats flex gap-4 ">
-                <div className="flex flex-col font-semibold">
-                  TEMP{" "}
-                  <span className="text-xl md:text-xl font-normal">23° C</span>
-                </div>
-                <div className="flex flex-col font-semibold">
-                  Humidity{" "}
-                  <span className="text-xl md:text-xl font-normal">66%</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HomeWidget />
 
           {/* Temperature Widget */}
           <div className="temperature_widget flex flex-col h-full p-6 sm:p-4 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out transform hover:scale-105 relative z-10">
