@@ -1,8 +1,11 @@
 import requests
 import json
 import os
+from dotenv import load_dotenv
 
-SMARTTHINGS_TOKEN = '2e6a95e5-e0d4-455f-8fd7-41c0e8adcea2'  # replace with your token
+load_dotenv()
+
+SMARTTHINGS_TOKEN = 'SMARTTHINGS_TOKEN'  # replace with your token
 HEADERS = {
     'Authorization': 'Bearer {}'.format(SMARTTHINGS_TOKEN),
     'Content-Type': 'application/json',

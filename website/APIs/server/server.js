@@ -70,7 +70,7 @@ app.post('/api/v1/turnOffThermostat', (req, res) => {
 });
 
 app.get('/api/v1/getModeAndTemp', (req, res) => {
-    exec('python ../nest/smart_thermostat.py get_mode_temp', (err, stdout, stderr) => {
+    exec('python3 ../nest/smart_thermostat.py get_mode_temp', (err, stdout, stderr) => {
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -85,7 +85,7 @@ app.get('/api/v1/getModeAndTemp', (req, res) => {
 
 
 app.get('/api/v1/fetchDevices', (req, res) => {
-    exec('python ../smartThings/fetch_devices.py', (err, stdout, stderr) => {
+    exec('python3 ../smartThings/fetch_devices.py', (err, stdout, stderr) => {
         if (err) {
             console.error(err);
             res.json({ success: false });

@@ -1,8 +1,11 @@
 import requests
 import json
 import os
+from dotenv import load_dotenv
 
-SMARTTHINGS_TOKEN = '2e6a95e5-e0d4-455f-8fd7-41c0e8adcea2'  # replace with your token
+load_dotenv()
+
+SMARTTHINGS_TOKEN = 'SMARTTHINGS_TOKEN'  # replace with your token
 HEADERS = {
     'Authorization': 'Bearer {}'.format(SMARTTHINGS_TOKEN),
     'Content-Type': 'application/json',
@@ -50,15 +53,17 @@ def main():
 
     room_statuses = {}
     for light in lights:
-        room_id = light.pop('roomId')
+        room_id = light['roomId']
         location_id = light.pop('locationId')
         if room_id not in room_statuses:
             room_name = get_room_name(room_id, location_id)
             room_statuses[room_id] = {
                 'status': 'off',
                 'roomName': room_name,
+                'roomId': room_id,
                 'lights': [],
             }
+        light.pop('roomId')
         room_statuses[room_id]['lights'].append(light)
 
         if any(light['status'] == 'on' for light in room_statuses[room_id]['lights']):

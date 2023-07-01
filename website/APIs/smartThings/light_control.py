@@ -1,9 +1,13 @@
 import requests
 import json
 import sys
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # replace with your actual token
-API_TOKEN = '2e6a95e5-e0d4-455f-8fd7-41c0e8adcea2'
+API_TOKEN = 'SMARTTHINGS_TOKEN'
 
 
 def post_command(device_id, command, argument=None):
