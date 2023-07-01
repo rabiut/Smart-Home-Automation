@@ -71,9 +71,7 @@ const Dashboard = () => {
           <HomeWidget />
 
           {/* Temperature Widget */}
-          <div className="temperature_widget flex flex-col h-full p-6 sm:p-4 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out transform hover:scale-105 relative z-10">
-            <TemperatureWidget />
-          </div>
+          <TemperatureWidget />
 
           {/* Wifi Widget*/}
           <div className="wifi_widget flex flex-col h-1/2 bg-white rounded-lg shadow-md p-6 sm:p-4 border border-gray-200 transition-transform duration-300 ease-in-out transform hover:scale-105">

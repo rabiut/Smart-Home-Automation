@@ -52,50 +52,52 @@ const TemperatureWidget = () => {
 
   return (
     <>
-      {isLoading ? (
-        <div className="flex items-center justify-center w-full h-full">
-          Loading...
-        </div>
-      ) : errorMessage ? (
-        <div className="flex items-center justify-center w-full h-full">
-          {errorMessage}
-        </div>
-      ) : (
-        <>
-          <div className="title font-bold ">Temperature</div>
-          <div className="content flex flex-col justify-center h-full rounded-lg pt-4">
-            <div className="text-4xl mb-2 text-center">
-              {sliderValue ? sliderValue.toFixed(2) : 0}° C
-            </div>
-            <div className="text-base mb-4 text-center uppercase">
-              {" "}
-              Mode: {mode}
-            </div>
-            <div>
-              <Slider
-                value={[sliderValue]}
-                min={min}
-                max={max}
-                step={step}
-                onValueChange={([value]) => setSliderValue(value)}
+      <div className="temperature_widget flex flex-col h-full p-6 sm:p-4 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out transform hover:scale-105 relative z-10">
+        {isLoading ? (
+          <div className="flex items-center justify-center w-full h-full">
+            Loading...
+          </div>
+        ) : errorMessage ? (
+          <div className="flex items-center justify-center w-full h-full">
+            {errorMessage}
+          </div>
+        ) : (
+          <>
+            <div className="title font-bold ">Temperature</div>
+            <div className="content flex flex-col justify-center h-full rounded-lg pt-4">
+              <div className="text-4xl mb-2 text-center">
+                {sliderValue ? sliderValue.toFixed(2) : 0}° C
+              </div>
+              <div className="text-base mb-4 text-center uppercase">
+                {" "}
+                Mode: {mode}
+              </div>
+              <div>
+                <Slider
+                  value={[sliderValue]}
+                  min={min}
+                  max={max}
+                  step={step}
+                  onValueChange={([value]) => setSliderValue(value)}
+                />
+              </div>
+              <div className="flex justify-evenly mt-4 text-2xl">
+                <button onClick={decreaseTemp}>
+                  <AiOutlineMinus />
+                </button>
+                <button onClick={increaseTemp}>
+                  <AiOutlinePlus />
+                </button>
+              </div>
+              <Dropdown
+                options={modes}
+                selectedOption={mode}
+                onSelect={setMode}
               />
             </div>
-            <div className="flex justify-evenly mt-4 text-2xl">
-              <button onClick={decreaseTemp}>
-                <AiOutlineMinus />
-              </button>
-              <button onClick={increaseTemp}>
-                <AiOutlinePlus />
-              </button>
-            </div>
-            <Dropdown
-              options={modes}
-              selectedOption={mode}
-              onSelect={setMode}
-            />
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </>
   );
 };
