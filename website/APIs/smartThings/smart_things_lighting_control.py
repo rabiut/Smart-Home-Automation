@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SMARTTHINGS_TOKEN = 'SMARTTHINGS_TOKEN'  # replace with your token
+SMARTTHINGS_TOKEN = os.getenv('SMARTTHINGS_TOKEN')  # replace with your token
 HEADERS = {
     'Authorization': 'Bearer {}'.format(SMARTTHINGS_TOKEN),
     'Content-Type': 'application/json',

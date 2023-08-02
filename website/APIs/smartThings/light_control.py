@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # replace with your actual token
-API_TOKEN = 'SMARTTHINGS_TOKEN'
+API_TOKEN = os.getenv('SMARTTHINGS_TOKEN')
 
 
 def post_command(device_id, command, argument=None):

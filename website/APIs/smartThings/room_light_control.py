@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_TOKEN = 'SMARTTHINGS_TOKEN'
+API_TOKEN = os.getenv('SMARTTHINGS_TOKEN')
 
 def get_device_ids(room_id):
     url = f"https://api.smartthings.com/v1/devices"

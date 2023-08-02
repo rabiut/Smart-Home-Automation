@@ -1,5 +1,6 @@
 import os
 import json
+import sys  # Imported sys
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import pickle
@@ -60,13 +61,13 @@ for device in devices:
                             print(current_temperature_celsius)
 
                     else:
-                        print("Current temperature data is not available.")
+                        sys.stderr.write("Current temperature data is not available.\n")  # Used stderr
                 else:
-                    print("Temperature traits not found for this device.")
+                    sys.stderr.write("Temperature traits not found for this device.\n")  # Used stderr
             except Exception as e:
-                print(
-                    f"Error occurred while fetching device details: {str(e)}")
+                sys.stderr.write(
+                    f"Error occurred while fetching device details: {str(e)}\n")  # Used stderr
         else:
-            print("Device name is not available.")
+            sys.stderr.write("Device name is not available.\n")  # Used stderr
     else:
-        print("No thermostat found.")
+        sys.stderr.write("No thermostat found.\n")  # Used stderr

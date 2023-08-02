@@ -6,9 +6,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const pythonPath = "/home/pi/project/env/bin/python3";
 
 app.get('/api/v1/readTemp', (req, res) => {
-    exec('python ../nest/read_temp.py', (err, stdout, stderr) => {
+    exec(`${pythonPath} ../nest/read_temp.py`, (err, stdout, stderr) => {
+        // ... rest of the code
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -29,7 +31,8 @@ app.get('/api/v1/readTemp', (req, res) => {
 app.post('/api/v1/setCoolTemp', (req, res) => {
     const data = req.body;
 
-    exec(`python3 ../nest/smart_thermostat.py set_cool_temp ${data.temp}`, (err, stdout, stderr) => {
+    exec(`${pythonPath} ../nest/smart_thermostat.py set_cool_temp ${data.temp}`, (err, stdout, stderr) => {
+        // ... rest of the code
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -44,7 +47,8 @@ app.post('/api/v1/setCoolTemp', (req, res) => {
 app.post('/api/v1/setHeatTemp', (req, res) => {
     const data = req.body;
 
-    exec(`python3 ../nest/smart_thermostat.py set_heat_temp ${data.temp}`, (err, stdout, stderr) => {
+    exec(`${pythonPath} ../nest/smart_thermostat.py set_heat_temp ${data.temp}`, (err, stdout, stderr) => {
+        // ... rest of the code
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -57,7 +61,8 @@ app.post('/api/v1/setHeatTemp', (req, res) => {
 });
 
 app.post('/api/v1/turnOffThermostat', (req, res) => {
-    exec(`python3 ../nest/smart_thermostat.py turn_off`, (err, stdout, stderr) => {
+    exec(`${pythonPath} ../nest/smart_thermostat.py turn_off`, (err, stdout, stderr) => {
+        // ... rest of the code
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -70,7 +75,8 @@ app.post('/api/v1/turnOffThermostat', (req, res) => {
 });
 
 app.get('/api/v1/getModeAndTemp', (req, res) => {
-    exec('python3 ../nest/smart_thermostat.py get_mode_temp', (err, stdout, stderr) => {
+    exec(`${pythonPath} ../nest/smart_thermostat.py get_mode_temp`, (err, stdout, stderr) => {
+        // ... rest of the code
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -82,10 +88,9 @@ app.get('/api/v1/getModeAndTemp', (req, res) => {
     });
 });
 
-
-
 app.get('/api/v1/fetchDevices', (req, res) => {
-    exec('python3 ../smartThings/fetch_devices.py', (err, stdout, stderr) => {
+    exec(`${pythonPath} ../smartThings/fetch_devices.py`, (err, stdout, stderr) => {
+        // ... rest of the code
         if (err) {
             console.error(err);
             res.json({ success: false });
@@ -97,12 +102,11 @@ app.get('/api/v1/fetchDevices', (req, res) => {
     });
 });
 
-
 app.post('/api/v1/lights', (req, res) => {
     const data = req.body;
     let scriptPath = '../smartThings/light_control.py';
 
-    let command = `python3 ${scriptPath} ${data.action} ${data.device_id}`;
+    let command = `${pythonPath} ${scriptPath} ${data.action} ${data.device_id}`;
 
     // Add brightness level to the command if it is provided
     if (data.action === "brightness" && data.brightness_level) {
@@ -119,9 +123,5 @@ app.post('/api/v1/lights', (req, res) => {
         }
     });
 });
-
-
-
-
 
 app.listen(5000, '0.0.0.0', () => console.log('Server is running on port 5000'));

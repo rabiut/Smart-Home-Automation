@@ -1,11 +1,14 @@
 import os
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Get sunrise and sunset times
-API_KEY = "3768ab5ae7d64a399b0677add9081e81"
-LATITUDE = "43.255722"
-LONGITUDE = "-79.871101"
+API_KEY = os.getenv('API_KEY')
+LATITUDE = os.getenv('LATITUDE')
+LONGITUDE = os.getenv('LONGITUDE')
 response = requests.get(f"https://api.ipgeolocation.io/astronomy?apiKey={API_KEY}&lat={LATITUDE}&long={LONGITUDE}")
 data = response.json()
 

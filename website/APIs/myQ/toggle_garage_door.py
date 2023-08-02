@@ -13,7 +13,7 @@ myq_password = os.getenv("MYQ_PASSWORD")
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        account = await login("MYQ_EMAIL", "MYQ_PASSWORD", session)
+        account = await login(myq_email, myq_password, session)
 
         for device in account.devices.values():
             if device.device_family == 'garagedoor':

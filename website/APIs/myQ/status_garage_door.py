@@ -14,7 +14,7 @@ myq_password = os.getenv("MYQ_PASSWORD")
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        account = await login("tktrabiu@gmail.com", "!TRAKFAM3K", session)
+        account = await login(myq_email, myq_password, session)
 
         door_status = {}
         for device in account.devices.values():
