@@ -1,0 +1,54 @@
+2023-06-24 00:44:15 INFO: Python script started running.
+2023-06-24 00:46:11 INFO: Python script started running.
+2023-06-24 00:49:09 INFO: Python script started running.
+2023-06-24 12:14:38 INFO: Python script started running.
+2023-06-24 12:14:41 INFO: Python script started running.
+2023-06-24 12:17:54 INFO: Python script started running.
+2023-06-24 12:25:19 INFO: Python script started running.
+2023-06-24 12:25:23 INFO: Python script started running.
+2023-06-24 12:26:36 INFO: Python script started running.
+2023-06-24 12:27:59 INFO: Python script started running.
+2023-06-24 12:28:26 INFO: Python script started running.
+2023-06-24 12:34:26 INFO: Python script started running.
+2023-06-24 12:34:40 INFO: Python script started running.
+2023-06-24 12:34:45 INFO: Python script started running.
+2023-06-24 12:59:14 INFO: Python script started running.
+2023-06-24 13:16:54 INFO: Python script started running.
+2023-06-24 13:28:50 INFO: Python script started running.
+2023-06-24 13:29:01 INFO: Python script started running.
+2023-06-24 14:01:23 INFO: Python script started running.
+2023-06-24 14:01:48 INFO: Python script started running.
+2023-06-24 14:02:00 INFO: Python script started running.
+2023-06-24 18:23:20 INFO: Python script started running.
+2023-06-24 18:23:34 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.59", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:23:34 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.60", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:23:47 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.59", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:23:47 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.60", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:24:48 INFO: Python script started running.
+2023-06-24 18:33:07 INFO: Python script started running.
+2023-06-24 18:33:20 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.59", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:33:20 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.60", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:33:33 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.59", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:33:33 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.60", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:49:50 INFO: Python script started running.
+2023-06-24 18:50:03 ERROR: Failed to turn off the bulb wizlight(ip="192.168.2.59", port=38899, mac="None"): The request to the bulb timed out
+2023-06-24 18:50:03 ERROR: Failed to turn off the bulb wizlight(ip="192.168.2.60", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:45:20 INFO: Python script started running.
+2023-06-25 09:45:33 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.49", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:45:33 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.50", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:45:46 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.49", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:45:46 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.50", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:47:51 INFO: Python script started running.
+2023-06-25 09:48:04 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.49", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:48:04 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.50", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:48:17 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.49", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 09:48:17 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.50", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:17:23 INFO: Python script started running.
+2023-06-25 10:17:36 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.49", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:17:36 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.50", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:17:49 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.49", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:17:49 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.50", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:18:02 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.59", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:18:02 ERROR: Failed to get status for bulb wizlight(ip="192.168.2.60", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:18:15 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.59", port=38899, mac="None"): The request to the bulb timed out
+2023-06-25 10:18:15 ERROR: Failed to get brightness for bulb wizlight(ip="192.168.2.60", port=38899, mac="None"): The request to the bulb timed out
